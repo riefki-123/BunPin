@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Bantuan - BundaPintar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { green: '#2FA77C', mint: '#7CC8B2', light: '#DFF3EC' },
+                        secondary: { coral: '#F07C82', peach: '#F6A5A8', blush: '#FCE3E3' },
+                        neutral: { cream: '#F4EDE4', white: '#FFFFFF', gray: '#6B6B6B', dark: '#2C2C2C' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-neutral-cream text-neutral-dark font-sans flex flex-col min-h-screen pb-24 md:pb-0">
+
+    <nav class="bg-neutral-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-baby text-primary-green text-2xl"></i>
+                        <span class="font-bold text-xl text-primary-green tracking-tight">Bunda<span
+                                class="text-secondary-coral">Pintar</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="text-neutral-gray hover:bg-neutral-cream px-5 py-2 rounded-full transition font-medium">Beranda</a>
+                    <a href="about.html" class="text-neutral-gray hover:bg-neutral-cream px-5 py-2 rounded-full transition font-medium">Tentang Kami</a>
+                    <a href="contact.html" class="bg-primary-light text-primary-green px-5 py-2 rounded-full font-bold transition">Pusat Bantuan</a>
+                    <a href="layanan.html" class="bg-primary-green text-neutral-white px-6 py-2 rounded-full font-bold hover:bg-primary-mint transition shadow-md ml-4">Layanan Hub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-12 fade-in-up" style="animation-delay: 0.1s;">
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral-dark mb-4">Pusat Bantuan & Kontak Darurat</h1>
+                <p class="text-neutral-gray">Kami selalu ada di saat Bunda membutuhkan panduan atau bantuan medis
+                    darurat.</p>
+            </div>
+
+            <div class="bg-secondary-coral rounded-3xl p-8 mb-12 shadow-xl text-neutral-white fade-in-up flex flex-col md:flex-row items-center justify-between"
+                style="animation-delay: 0.2s;">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fa-solid fa-triangle-exclamation text-3xl text-white"></i>
+                        <h2 class="text-2xl font-bold">Darurat Medis?</h2>
+                    </div>
+                    <p class="text-secondary-blush">Segera hubungi layanan ambulans atau IGD terdekat jika terjadi
+                        pendarahan atau kontraksi hebat.</p>
+                </div>
+                <div class="flex flex-col gap-3 min-w-[200px]">
+                    <a href="tel:119"
+                        class="bg-white text-secondary-coral font-bold py-3 px-6 rounded-full text-center hover:bg-neutral-cream transition shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-phone"></i> Hubungi 119
+                    </a>
+                    <a href="tel:118"
+                        class="bg-transparent border border-white text-white font-bold py-3 px-6 rounded-full text-center hover:bg-white hover:text-secondary-coral transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-truck-medical"></i> Ambulans 118
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-neutral-white rounded-2xl p-8 shadow-md fade-in-up" style="animation-delay: 0.3s;">
+                    <h3 class="text-2xl font-bold text-neutral-dark mb-6">Kirim Pesan / Keluhan</h3>
+                    <form
+                        onsubmit="event.preventDefault(); alert('Pesan Bunda telah terkirim. Terima kasih atas umpan baliknya!'); this.reset();"
+                        class="space-y-5">
+                        <div>
+                            <label for="nama" class="block text-sm font-medium text-neutral-gray mb-1">Nama Bunda</label>
+                            <input type="text" id="nama" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-mint focus:border-primary-mint outline-none transition bg-neutral-cream/50">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-neutral-gray mb-1">Email / No WhatsApp</label>
+                            <input type="text" id="email" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-mint focus:border-primary-mint outline-none transition bg-neutral-cream/50">
+                        </div>
+                        <div>
+                            <label for="pesan" class="block text-sm font-medium text-neutral-gray mb-1">Pesan</label>
+                            <textarea id="pesan" rows="4" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-mint focus:border-primary-mint outline-none transition bg-neutral-cream/50"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-primary-green text-white font-bold py-3 px-4 rounded-xl hover:bg-primary-mint transition shadow-lg">
+                            Kirim Pesan <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="fade-in-up" style="animation-delay: 0.4s;">
+                    <h3 class="text-2xl font-bold text-neutral-dark mb-6">Tautan Resmi</h3>
+                    <p class="text-neutral-gray mb-6">Informasi rujukan terpercaya berdasarkan panduan Kementerian Kesehatan Republik Indonesia.</p>
+
+                    <div class="space-y-4">
+                        <a href="https://kemkes.go.id" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-between p-4 bg-neutral-white rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-primary-green">
+                            <div>
+                                <h4 class="font-bold text-neutral-dark">Kemenkes RI</h4>
+                                <p class="text-sm text-neutral-gray">Portal Resmi Kementerian Kesehatan</p>
+                            </div>
+                            <i class="fa-solid fa-external-link-alt text-primary-mint"></i>
+                        </a>
+                        <a href="https://ayosehat.kemkes.go.id" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-between p-4 bg-neutral-white rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-secondary-coral">
+                            <div>
+                                <h4 class="font-bold text-neutral-dark">Ayo Sehat Kemenkes</h4>
+                                <p class="text-sm text-neutral-gray">Direktori Edukasi Kesehatan Rakyat</p>
+                            </div>
+                            <i class="fa-solid fa-external-link-alt text-secondary-peach"></i>
+                        </a>
+
+                        <div class="mt-8 p-6 bg-primary-light rounded-xl">
+                            <h4 class="font-bold text-primary-green mb-2"><i class="fa-brands fa-whatsapp mr-2"></i>Layanan WhatsApp</h4>
+                            <p class="text-sm text-neutral-gray mb-4">Bunda juga bisa terhubung langsung via WA ke admin kami.</p>
+                            <a href="#"
+                                class="inline-block bg-[#25D366] text-white px-5 py-2 rounded-full font-medium shadow hover:bg-[#128C7E] transition">
+                                WhatsApp Admin
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-neutral-white border-t border-gray-200 py-8 mt-auto pb-24 md:pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-neutral-gray text-sm">
+                &copy; 2026 BundaPintar. Dibuat dengan <i class="fa-solid fa-heart text-secondary-coral mx-1"></i> untuk
+                Ibu Indonesia.
+            </p>
+        </div>
+    </footer>
+
+    <div class="md:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#2C2C2C]/90 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.3)] rounded-full p-1.5 flex items-center gap-1 w-max">
+        
+        <a href="index.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-house text-lg"></i>
+        </a>
+
+        <a href="about.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-users text-lg"></i>
+        </a>
+
+        <a href="contact.html" class="flex items-center gap-2 bg-primary-green text-white px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm">
+            <i class="fa-solid fa-headset text-sm"></i>
+            <span class="text-sm font-bold tracking-wide">Bantuan</span>
+        </a>
+
+        <a href="layanan.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-layer-group text-lg"></i>
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

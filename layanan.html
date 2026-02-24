@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Hub - BundaPintar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { green: '#2FA77C', mint: '#7CC8B2', light: '#DFF3EC' },
+                        secondary: { coral: '#F07C82', peach: '#F6A5A8', blush: '#FCE3E3' },
+                        neutral: { cream: '#F4EDE4', white: '#FFFFFF', gray: '#6B6B6B', dark: '#2C2C2C' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@11/dist/js/shepherd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@11/dist/css/shepherd.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease-out forwards; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .shepherd-theme-custom .shepherd-content { border-radius: 12px; font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+
+<body class="bg-neutral-cream text-neutral-dark font-sans flex flex-col min-h-screen pb-24 md:pb-0">
+
+    <nav class="bg-neutral-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-baby text-primary-green text-2xl"></i>
+                        <span class="font-bold text-xl text-primary-green tracking-tight">Bunda<span class="text-secondary-coral">Pintar</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="text-neutral-gray hover:bg-neutral-cream px-5 py-2 rounded-full transition font-medium">Beranda</a>
+                    <a href="about.html" class="text-neutral-gray hover:bg-neutral-cream px-5 py-2 rounded-full transition font-medium">Tentang Kami</a>
+                    <a href="contact.html" class="text-neutral-gray hover:bg-neutral-cream px-5 py-2 rounded-full transition font-medium">Pusat Bantuan</a>
+                    <a href="layanan.html" class="bg-primary-light text-primary-green px-6 py-2 rounded-full font-bold transition shadow-sm ml-4">Layanan Hub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-primary-green shadow-md text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div>
+                <h1 class="text-xl font-bold">Layanan Interaktif</h1>
+                <p class="text-primary-light text-sm" id="greeting-text">Halo Bunda!</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white/20 px-4 py-2 rounded-full cursor-pointer hover:bg-white/30 transition" onclick="switchTab('tab3')">
+                <i class="fa-solid fa-star text-yellow-300"></i>
+                <div class="text-sm font-medium">
+                    <span id="header-level">Lv.1</span> (<span id="header-xp">0 XP</span>)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-neutral-white border-b border-gray-200 sticky top-16 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-2">
+            <div class="grid grid-cols-2 gap-3 md:flex md:space-x-4 overflow-x-auto no-scrollbar" id="tour-tabs-container">
+                
+                <button id="btn-tab1" onclick="switchTab('tab1')"
+                    class="tab-btn active bg-primary-green text-white border-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition shadow-md md:shadow-none">
+                    <i class="fa-solid fa-chart-line text-lg md:text-base"></i> Pantau Tumbuh
+                </button>
+                
+                <button id="btn-tab2" onclick="switchTab('tab2')"
+                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:border-primary-mint hover:text-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition">
+                    <i class="fa-solid fa-person-pregnant text-lg md:text-base"></i> Jejak Janin
+                </button>
+                
+                <button id="btn-tab3" onclick="switchTab('tab3')"
+                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:border-primary-mint hover:text-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition">
+                    <i class="fa-solid fa-graduation-cap text-lg md:text-base"></i> Akademi Bunda
+                </button>
+                
+                <button id="btn-tab4" onclick="switchTab('tab4')"
+                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:border-primary-mint hover:text-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition">
+                    <i class="fa-solid fa-robot text-lg md:text-base"></i> Tanya BidanBot
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+
+        <div id="tab1" class="tab-content active">
+            <div class="flex flex-col lg:flex-row gap-8">
+
+                <div class="lg:w-1/3 bg-neutral-white rounded-2xl p-6 shadow-md border border-gray-100" id="tour-input-tumbuh">
+                    <h2 class="text-xl font-bold text-neutral-dark mb-4 border-b pb-2"><i class="fa-solid fa-weight-scale text-primary-mint mr-2"></i>Catat Data Baru</h2>
+                    <form id="form-tumbuh" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold text-neutral-dark mb-2">Jenis Kelamin Anak</label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center gap-2 bg-neutral-cream px-4 py-3 rounded-xl cursor-pointer flex-1 justify-center border-2 border-transparent hover:border-primary-mint transition">
+                                    <input type="radio" name="gender" value="L" checked class="text-primary-green focus:ring-primary-green w-4 h-4">
+                                    <span class="text-sm font-bold">Laki-laki</span>
+                                </label>
+                                <label class="flex items-center gap-2 bg-neutral-cream px-4 py-3 rounded-xl cursor-pointer flex-1 justify-center border-2 border-transparent hover:border-secondary-coral transition">
+                                    <input type="radio" name="gender" value="P" class="text-secondary-coral focus:ring-secondary-coral w-4 h-4">
+                                    <span class="text-sm font-bold">Perempuan</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="usia" class="block text-sm font-bold text-neutral-dark">Usia Anak</label>
+                                <span id="usia-label" class="text-xs font-bold text-primary-green bg-primary-light px-3 py-1 rounded-full border border-primary-mint">0 Bulan</span>
+                            </div>
+                            <input type="range" id="usia" min="0" max="24" step="1" value="0" required
+                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary-green mt-2">
+                            <div class="flex justify-between text-[10px] text-neutral-gray mt-2 font-semibold px-1">
+                                <span>0</span>
+                                <span>6</span>
+                                <span>12</span>
+                                <span>18</span>
+                                <span>24</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label for="berat" class="block text-sm font-bold text-neutral-dark mb-2">Berat Badan (kg)</label>
+                                <input type="number" id="berat" step="0.1" required
+                                    class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-mint focus:border-primary-mint outline-none transition bg-neutral-cream/50">
+                            </div>
+                            <div class="flex-1">
+                                <label for="tinggi" class="block text-sm font-bold text-neutral-dark mb-2">Tinggi Badan (cm)</label>
+                                <input type="number" id="tinggi" step="0.1" required
+                                    class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-mint focus:border-primary-mint outline-none transition bg-neutral-cream/50">
+                            </div>
+                        </div>
+
+                        <div id="status-rujukan" class="text-xs text-primary-green font-medium py-2 px-3 bg-primary-light rounded-md hidden">
+                            Mengambil standar rujukan...
+                        </div>
+
+                        <button type="submit" class="w-full bg-primary-green text-white font-bold py-3 px-4 rounded-xl hover:bg-primary-mint transition shadow-lg mt-2">
+                            Simpan & Perbarui Grafik
+                        </button>
+                    </form>
+
+                    <div class="mt-8 p-4 bg-secondary-blush/50 rounded-xl text-center border border-secondary-blush">
+                        <i class="fa-solid fa-award text-3xl text-secondary-coral mb-2"></i>
+                        <p class="text-sm font-medium text-secondary-coral">Dapatkan 20 XP setiap kali Bunda mencatat data baru!</p>
+                    </div>
+                </div>
+
+                <div class="lg:w-2/3 bg-neutral-white rounded-2xl p-6 shadow-md border border-gray-100" id="tour-chart-tumbuh">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-neutral-dark"><i class="fa-solid fa-chart-area text-primary-mint mr-2"></i>Grafik Pertumbuhan (KMS)</h2>
+                        <div class="text-xs font-semibold px-2 py-1 bg-neutral-cream rounded-md border text-neutral-gray">0-24 Bulan</div>
+                    </div>
+                    <div class="relative h-80 w-full">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+            <div onclick="switchTab('tab4')"
+                class="mt-8 bg-primary-light border border-primary-mint rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-[#c9ebd1] transition">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-primary-green flex items-center justify-center">
+                        <i class="fa-solid fa-robot text-white"></i>
+                    </div>
+                    <p class="text-primary-green font-medium text-sm md:text-base">Punya pertanyaan lebih lanjut? Konsultasikan ke BidanBot di sini <i class="fa-solid fa-chevron-right ml-1"></i></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-neutral-white rounded-2xl p-6 md:p-8 shadow-md border border-gray-100 text-center mb-8" id="tour-jejak-janin">
+                    <div class="w-16 h-16 rounded-full bg-secondary-blush flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-calendar-days text-secondary-coral text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-neutral-dark mb-2">Kalkulator Jejak Janin</h2>
+                    <p class="text-neutral-gray mb-6">Hitung usia kehamilan Bunda berdasarkan Hari Pertama Haid Terakhir (HPHT).</p>
+
+                    <form id="form-janin" class="bg-neutral-cream p-6 rounded-2xl flex flex-col md:flex-row gap-4 items-end">
+                        <div class="w-full text-left">
+                            <label for="hpht" class="block text-sm font-bold text-neutral-dark mb-2">Tanggal HPHT Bunda</label>
+                            <input type="date" id="hpht" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-secondary-coral outline-none text-neutral-dark uppercase font-medium">
+                        </div>
+                        <div class="w-full text-left">
+                            <label for="tanggalCek" class="block text-sm font-bold text-neutral-dark mb-2">Tanggal Cek (Opsional)</label>
+                            <input type="date" id="tanggalCek" class="w-full px-4 py-3 rounded-xl border border-gray-300 outline-none text-neutral-dark uppercase font-medium">
+                        </div>
+                        <button type="submit" class="w-full md:w-auto bg-secondary-coral text-white font-bold py-3 px-8 rounded-xl hover:bg-secondary-peach transition shadow-lg whitespace-nowrap">
+                            Hitung Usia Janin
+                        </button>
+                    </form>
+                </div>
+
+                <div id="janin-result" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-primary-green fade-in-up">
+                        <p class="text-neutral-gray text-sm font-medium mb-1">Usia Kehamilan</p>
+                        <h3 class="text-3xl font-extrabold text-primary-green" id="res-usia-janin">--</h3>
+                        <p class="text-xs text-neutral-gray mt-2">Dihitung otomatis</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-secondary-coral fade-in-up" style="animation-delay: 0.1s;">
+                        <p class="text-neutral-gray text-sm font-medium mb-1">Hari Perkiraan Lahir (HPL)</p>
+                        <h3 class="text-xl font-extrabold text-secondary-coral" id="res-hpl">--</h3>
+                        <p class="text-xs text-neutral-gray mt-2">Semoga dilancarkan Bunda</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-primary-mint fade-in-up" style="animation-delay: 0.2s;">
+                        <p class="text-neutral-gray text-sm font-medium mb-1">Perkiraan Normal Janin</p>
+                        <div class="mt-1 font-bold text-neutral-dark text-sm" id="res-estimasi">
+                            Berat: <span class="text-primary-mint font-extrabold text-lg">--</span><br>
+                            Panjang: <span class="text-primary-mint font-extrabold text-lg">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="switchTab('tab4')"
+                    class="mt-8 bg-secondary-blush border border-secondary-peach rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-[#fad4d4] transition">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-secondary-coral flex items-center justify-center">
+                            <i class="fa-solid fa-robot text-white"></i>
+                        </div>
+                        <p class="text-secondary-coral font-medium text-sm md:text-base">Punya pertanyaan lebih lanjut? Konsultasikan ke BidanBot di sini <i class="fa-solid fa-chevron-right ml-1"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+                <div class="lg:col-span-1" id="tour-gamifikasi">
+                    <div class="bg-neutral-white rounded-2xl p-6 shadow-md text-center border-2 border-yellow-100">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-yellow-300 to-yellow-500 rounded-full flex items-center justify-center shadow-lg mb-4">
+                            <i class="fa-solid fa-trophy text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-dark">Profil Bunda</h3>
+
+                        <div class="my-4">
+                            <div class="flex justify-between text-sm font-bold text-neutral-gray mb-1">
+                                <span id="akademi-lvl">Level 1</span>
+                                <span id="akademi-xp">0 XP</span>
+                            </div>
+                            <div class="w-full bg-neutral-cream rounded-full h-3">
+                                <div class="bg-primary-green h-3 rounded-full transition-all duration-1000" id="xp-bar" style="width: 0%"></div>
+                            </div>
+                            <p class="text-xs text-neutral-gray mt-2" id="xp-to-next">-- XP untuk naik level</p>
+                        </div>
+
+                        <div class="border-t border-gray-100 pt-4 mt-4">
+                            <p class="text-sm font-bold text-neutral-dark mb-3 text-left">Badges Koleksi:</p>
+                            <div class="flex flex-wrap gap-2 justify-center" id="badges-container">
+                                <span class="text-xs bg-neutral-cream text-neutral-gray px-2 py-1 rounded-md">Belum ada badge</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-neutral-dark">Materi Edukasi</h2>
+                        <span class="text-sm font-medium bg-primary-light text-primary-green px-3 py-1 rounded-full"><i class="fa-solid fa-book-open mr-1"></i>3 Modul Tersedia</span>
+                    </div>
+
+                    <div class="space-y-4" id="modul-list">
+                        <div class="bg-neutral-white rounded-2xl p-6 shadow flex flex-col sm:flex-row gap-6 items-center border hover:border-primary-mint transition group cursor-pointer" onclick="readModule(1)">
+                            <div class="w-24 h-24 rounded-xl bg-primary-light flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-apple-whole text-4xl text-primary-green group-hover:scale-110 transition"></i>
+                            </div>
+                            <div class="flex-grow text-center sm:text-left">
+                                <div class="flex justify-center sm:justify-start gap-2 mb-2">
+                                    <span class="text-xs font-bold bg-yellow-100 text-yellow-700 px-2 py-1 rounded">+10 XP (Baca)</span>
+                                    <span class="text-xs font-bold bg-neutral-cream text-neutral-gray px-2 py-1 rounded">Nutrisi</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-neutral-dark mb-2">Pentingnya ASI Eksklusif dan MPASI</h3>
+                                <p class="text-sm text-neutral-gray">Pelajari tahapan pemberian makanan pendamping ASI yang tepat untuk mendukung kecerdasan otak anak.</p>
+                            </div>
+                            <button class="bg-neutral-cream text-primary-green font-bold w-full sm:w-auto px-6 py-3 rounded-xl hover:bg-primary-mint hover:text-white transition whitespace-nowrap">
+                                Baca Sekarang
+                            </button>
+                        </div>
+
+                        <div class="bg-neutral-white rounded-2xl p-6 shadow flex flex-col sm:flex-row gap-6 items-center border hover:border-primary-mint transition group cursor-pointer" onclick="readModule(2)">
+                            <div class="w-24 h-24 rounded-xl bg-secondary-blush flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-shield-virus text-4xl text-secondary-coral group-hover:scale-110 transition"></i>
+                            </div>
+                            <div class="flex-grow text-center sm:text-left">
+                                <div class="flex justify-center sm:justify-start gap-2 mb-2">
+                                    <span class="text-xs font-bold bg-yellow-100 text-yellow-700 px-2 py-1 rounded">+10 XP</span>
+                                    <span class="text-xs font-bold bg-neutral-cream text-neutral-gray px-2 py-1 rounded">Imunisasi</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-neutral-dark mb-2">Jadwal Imunisasi Dasar Lengkap</h3>
+                                <p class="text-sm text-neutral-gray">Lindungi Si Kecil dari penyakit berbahaya. Kenali jenis imunisasi dan kapan waktu terbaik untuk memberikannya.</p>
+                            </div>
+                            <button class="bg-neutral-cream text-primary-green font-bold w-full sm:w-auto px-6 py-3 rounded-xl hover:bg-primary-mint hover:text-white transition whitespace-nowrap">
+                                Baca Sekarang
+                            </button>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-primary-green to-primary-mint rounded-2xl p-6 shadow-lg flex flex-col sm:flex-row gap-6 items-center text-white cursor-pointer mt-8" onclick="takeQuiz()">
+                            <div class="w-20 h-20 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-gamepad text-4xl text-white"></i>
+                            </div>
+                            <div class="flex-grow text-center sm:text-left">
+                                <div class="flex justify-center sm:justify-start gap-2 mb-2">
+                                    <span class="text-xs font-bold bg-yellow-400 text-yellow-900 px-2 py-1 rounded">+50 XP (Kuis)</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Kuis: Mitos atau Fakta seputar Stunting?</h3>
+                                <p class="text-sm text-white/90">Uji pengetahuan Bunda dan dapatkan XP dalam jumlah besar!</p>
+                            </div>
+                            <button class="bg-white text-primary-green font-bold w-full sm:w-auto px-6 py-3 rounded-xl hover:bg-neutral-cream transition shadow-md whitespace-nowrap">
+                                Mulai Kuis
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div onclick="switchTab('tab4')"
+                        class="mt-8 bg-neutral-white border border-gray-200 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-neutral-dark flex items-center justify-center">
+                                <i class="fa-solid fa-robot text-white"></i>
+                            </div>
+                            <p class="text-neutral-dark font-medium text-sm md:text-base">Materi kurang lengkap? Tanyakan ke BidanBot! <i class="fa-solid fa-chevron-right ml-1"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab4" class="tab-content">
+            <div class="text-center mb-6" id="tour-bidanbot">
+                <h2 class="text-2xl font-bold text-neutral-dark inline-flex items-center gap-2">
+                    <i class="fa-solid fa-robot text-primary-mint"></i> Tanya BidanBot
+                </h2>
+                <p class="text-neutral-gray mt-2">Asisten virtual yang siap menjawab pertanyaan seputar kehamilan dan ibu menyusui.</p>
+            </div>
+
+            <div class="w-full rounded-2xl overflow-hidden shadow-2xl border border-primary-mint bg-neutral-white relative">
+                
+                <script type="module">
+                  import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
+                  Typebot.initStandard({ typebot: "my-typebot-rkc5qhp" });
+                </script>
+                
+                <typebot-standard style="height: 75vh; width: 100%; display: block;"></typebot-standard>
+            
+            </div>
+        </div>
+
+    </main>
+
+    <div class="md:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#2C2C2C]/90 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.3)] rounded-full p-1.5 flex items-center gap-1 w-max">
+        
+        <a href="index.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-house text-lg"></i>
+        </a>
+        <a href="about.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-users text-lg"></i>
+        </a>
+        <a href="contact.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-headset text-lg"></i>
+        </a>
+        <a href="layanan.html" class="flex items-center gap-2 bg-primary-green text-white px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm">
+            <i class="fa-solid fa-layer-group text-sm"></i>
+            <span class="text-sm font-bold tracking-wide">Layanan</span>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const usiaInput = document.getElementById('usia');
+            const usiaLabel = document.getElementById('usia-label');
+            if(usiaInput && usiaLabel) {
+                usiaInput.addEventListener('input', (e) => {
+                    usiaLabel.textContent = e.target.value + ' Bulan';
+                });
+            }
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-primary-green', 'text-white', 'border-primary-green');
+                btn.classList.add('bg-neutral-cream', 'text-neutral-gray');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-neutral-cream', 'text-neutral-gray');
+                activeBtn.classList.add('active', 'bg-primary-green', 'text-white', 'border-primary-green');
+            }
+        }
+    </script>
+    
+    <script src="js/store.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/layanan.js"></script>
+</body>
+</html>

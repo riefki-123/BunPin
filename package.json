@@ -1,0 +1,13 @@
+{
+  "name": "bunpin-vanila",
+  "version": "1.0.0",
+  "description": "BundaPintar PWA",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/output.css",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./css/output.css --watch"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

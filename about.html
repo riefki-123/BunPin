@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - BundaPintar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { green: '#2FA77C', mint: '#7CC8B2', light: '#DFF3EC' },
+                        secondary: { coral: '#F07C82', peach: '#F6A5A8', blush: '#FCE3E3' },
+                        neutral: { cream: '#F4EDE4', white: '#FFFFFF', gray: '#6B6B6B', dark: '#2C2C2C' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-neutral-cream text-neutral-dark font-sans flex flex-col min-h-screen pb-24 md:pb-0">
+
+    <nav class="bg-neutral-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-baby text-primary-green text-2xl"></i>
+                        <span class="font-bold text-xl text-primary-green tracking-tight">Bunda<span
+                                class="text-secondary-coral">Pintar</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="text-neutral-gray hover:bg-neutral-cream px-5 py-2 rounded-full transition font-medium">Beranda</a>
+                    <a href="about.html" class="bg-primary-light text-primary-green px-5 py-2 rounded-full font-bold transition">Tentang Kami</a>
+                    <a href="contact.html" class="text-neutral-gray hover:bg-neutral-cream px-5 py-2 rounded-full transition font-medium">Pusat Bantuan</a>
+                    <a href="layanan.html" class="bg-primary-green text-neutral-white px-6 py-2 rounded-full font-bold hover:bg-primary-mint transition shadow-md ml-4">Layanan Hub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <section class="py-16 md:py-24 bg-primary-green text-neutral-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in-up" style="animation-delay: 0.1s;">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Tahukah Bunda?</h1>
+                    <p class="text-lg text-primary-light max-w-2xl mx-auto">Data dan fakta di lapangan yang memotivasi
+                        kami untuk menghadirkan solusi digital bagi Ibu dan Anak di Indonesia.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-neutral-white text-neutral-dark rounded-2xl p-8 text-center shadow-lg fade-in-up"
+                        style="animation-delay: 0.2s;">
+                        <div class="text-5xl font-extrabold text-secondary-coral mb-2">21.6%</div>
+                        <h3 class="text-lg font-bold mb-2">Prevalensi Stunting (2022)</h3>
+                        <p class="text-neutral-gray text-sm">Masih berada di atas standar WHO (20%). Ini adalah PR besar
+                            bagi kesehatan nasional.</p>
+                    </div>
+                    <div class="bg-neutral-white text-neutral-dark rounded-2xl p-8 text-center shadow-lg fade-in-up"
+                        style="animation-delay: 0.3s;">
+                        <div class="text-5xl font-extrabold text-primary-green mb-2">1/3</div>
+                        <h3 class="text-lg font-bold mb-2">Ibu Kurang Informasi</h3>
+                        <p class="text-neutral-gray text-sm">Banyak ibu kesulitan mengakses jadwal imunisasi dan standar
+                            nutrisi yang tepat.</p>
+                    </div>
+                    <div class="bg-neutral-white text-neutral-dark rounded-2xl p-8 text-center shadow-lg fade-in-up"
+                        style="animation-delay: 0.4s;">
+                        <div class="text-5xl font-extrabold text-secondary-coral mb-2">1000</div>
+                        <h3 class="text-lg font-bold mb-2">Hari Pertama Kehidupan</h3>
+                        <p class="text-neutral-gray text-sm">Masa periode emas krusial yang menentukan kecerdasan dan
+                            kesehatan anak di masa depan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-neutral-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/2 fade-in-up" style="animation-delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Ibu dan Bayi" class="rounded-2xl shadow-xl object-cover h-96 w-full">
+                    </div>
+                    <div class="md:w-1/2 fade-in-up" style="animation-delay: 0.3s;">
+                        <h2 class="text-3xl font-bold text-neutral-dark mb-6">Misi Kami</h2>
+                        <p class="text-neutral-gray text-lg leading-relaxed mb-6">
+                            Hadir untuk mendampingi setiap langkah Bunda, dari masa kehamilan hingga masa balita. Kami
+                            percaya bahwa setiap anak berhak mendapatkan pemantauan tumbuh kembang yang optimal.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check-circle text-primary-green mt-1 mr-3 text-xl"></i>
+                                <span class="text-neutral-dark">Mendigitalkan buku KIA (Kesehatan Ibu & Anak)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check-circle text-primary-green mt-1 mr-3 text-xl"></i>
+                                <span class="text-neutral-dark">Mempermudah edukasi kesehatan dengan pendekatan
+                                    gamifikasi</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check-circle text-primary-green mt-1 mr-3 text-xl"></i>
+                                <span class="text-neutral-dark">Menyediakan AI Bidan cerdas untuk panduan darurat
+                                    non-medis</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-neutral-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-up" style="animation-delay: 0.1s;">
+                    <h2 class="text-3xl md:text-4xl font-bold text-neutral-dark">Tim Di Balik BundaPintar</h2>
+                    <p class="mt-4 text-neutral-gray">Dedikasi kami untuk senyum Ibu dan Bayi Indonesia.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-neutral-cream rounded-2xl p-6 text-center shadow hover:shadow-lg transition-transform transform hover:-translate-y-2 fade-in-up"
+                        style="animation-delay: 0.2s;">
+                        <div
+                            class="w-24 h-24 rounded-full bg-primary-mint mx-auto mb-4 border-4 border-white shadow-sm flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid fa-code text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-dark">Andi Susanto</h3>
+                        <p class="text-primary-green font-medium text-sm mb-3">Hacker / Lead Dev</p>
+                        <p class="text-neutral-gray text-sm">Bapak satu anak yang gemar ngoding dan meracik arsitektur
+                            Vanilla JS yang mutakhir.</p>
+                    </div>
+                    <div class="bg-neutral-cream rounded-2xl p-6 text-center shadow hover:shadow-lg transition-transform transform hover:-translate-y-2 fade-in-up"
+                        style="animation-delay: 0.3s;">
+                        <div
+                            class="w-24 h-24 rounded-full bg-secondary-coral mx-auto mb-4 border-4 border-white shadow-sm flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid fa-pen-nib text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-dark">Bunga Lestari</h3>
+                        <p class="text-secondary-coral font-medium text-sm mb-3">UI/UX Designer</p>
+                        <p class="text-neutral-gray text-sm">Pencinta palet warna pastel yang memastikan setiap tombol
+                            dan layar terasa hangat bagi Bunda.</p>
+                    </div>
+                    <div class="bg-neutral-cream rounded-2xl p-6 text-center shadow hover:shadow-lg transition-transform transform hover:-translate-y-2 fade-in-up"
+                        style="animation-delay: 0.4s;">
+                        <div
+                            class="w-24 h-24 rounded-full bg-primary-green mx-auto mb-4 border-4 border-white shadow-sm flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid fa-stethoscope text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-dark">dr. Citra</h3>
+                        <p class="text-primary-mint font-medium text-sm mb-3">Content / QA Medis</p>
+                        <p class="text-neutral-gray text-sm">Memastikan setiap artikel dan standar rujukan nutrisi
+                            sesuai dengan Kemenkes RI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-neutral-white border-t border-gray-200 py-8 mt-auto pb-24 md:pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-neutral-gray text-sm">
+                &copy; 2026 BundaPintar. Dibuat dengan <i class="fa-solid fa-heart text-secondary-coral mx-1"></i> untuk
+                Ibu Indonesia.
+            </p>
+        </div>
+    </footer>
+
+    <div class="md:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#2C2C2C]/90 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.3)] rounded-full p-1.5 flex items-center gap-1 w-max">
+        
+        <a href="index.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-house text-lg"></i>
+        </a>
+
+        <a href="about.html" class="flex items-center gap-2 bg-primary-green text-white px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm">
+            <i class="fa-solid fa-users text-sm"></i>
+            <span class="text-sm font-bold tracking-wide">Tentang</span>
+        </a>
+
+        <a href="contact.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-headset text-lg"></i>
+        </a>
+
+        <a href="layanan.html" class="w-11 h-11 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white rounded-full transition-all duration-300">
+            <i class="fa-solid fa-layer-group text-lg"></i>
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
