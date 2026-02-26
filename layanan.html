@@ -38,6 +38,32 @@
     </style>
 </head>
 
+<div id="edukasi-modal" class="fixed inset-0 z-[60] bg-neutral-dark/80 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity">
+            <div class="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative">
+                <div class="bg-primary-green text-white p-4 flex justify-between items-center sticky top-0 z-10">
+                    <div>
+                        <h3 id="modal-title" class="font-bold text-lg">Judul Bab</h3>
+                        <p id="modal-subtitle" class="text-xs text-primary-light">Subtitle</p>
+                    </div>
+                    <button onclick="closeModalEdukasi()" class="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-secondary-coral transition">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="p-6 overflow-y-auto no-scrollbar flex-grow bg-neutral-cream/30">
+                    <img id="modal-img" src="" alt="Ilustrasi" class="w-full h-48 object-cover rounded-xl shadow-sm mb-4">
+                    <div id="modal-content" class="text-neutral-dark space-y-3 text-sm leading-relaxed mb-8">
+                        </div>
+
+                    <div class="bg-secondary-blush border border-secondary-peach rounded-xl p-5">
+                        <h4 class="font-bold text-secondary-coral mb-4 flex items-center gap-2"><i class="fa-solid fa-star"></i> Kuis Pemahaman (+20 XP)</h4>
+                        <div id="modal-quiz-container" class="space-y-4">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 <body class="bg-neutral-cream text-neutral-dark font-sans flex flex-col min-h-screen pb-24 md:pb-0">
 
     <nav class="bg-neutral-white shadow-sm sticky top-0 z-50">
@@ -74,27 +100,27 @@
         </div>
     </div>
 
-    <div class="bg-neutral-white border-b border-gray-200 sticky top-16 z-40 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-2">
+    <div class="bg-neutral-white border-b border-gray-200 sticky top-16 z-40 shadow-sm w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-2 bg-neutral-white">
             <div class="grid grid-cols-2 gap-3 md:flex md:space-x-4 overflow-x-auto no-scrollbar" id="tour-tabs-container">
                 
                 <button id="btn-tab1" onclick="switchTab('tab1')"
-                    class="tab-btn active bg-primary-green text-white border-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition shadow-md md:shadow-none">
+                    class="tab-btn active bg-primary-green text-white border-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition-all duration-200 active:scale-95 active:bg-secondary-coral shadow-md md:shadow-none">
                     <i class="fa-solid fa-chart-line text-lg md:text-base"></i> Pantau Tumbuh
                 </button>
                 
                 <button id="btn-tab2" onclick="switchTab('tab2')"
-                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:border-primary-mint hover:text-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition">
+                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:bg-primary-light hover:border-primary-mint hover:text-primary-green active:bg-secondary-blush active:text-secondary-coral rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition-all duration-200 active:scale-95">
                     <i class="fa-solid fa-person-pregnant text-lg md:text-base"></i> Jejak Janin
                 </button>
                 
                 <button id="btn-tab3" onclick="switchTab('tab3')"
-                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:border-primary-mint hover:text-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition">
+                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:bg-primary-light hover:border-primary-mint hover:text-primary-green active:bg-secondary-blush active:text-secondary-coral rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition-all duration-200 active:scale-95">
                     <i class="fa-solid fa-graduation-cap text-lg md:text-base"></i> Akademi Bunda
                 </button>
                 
                 <button id="btn-tab4" onclick="switchTab('tab4')"
-                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:border-primary-mint hover:text-primary-green rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition">
+                    class="tab-btn bg-neutral-cream border border-gray-200 text-neutral-gray hover:bg-primary-light hover:border-primary-mint hover:text-primary-green active:bg-secondary-blush active:text-secondary-coral rounded-xl md:rounded-full py-3 md:py-2 px-3 font-bold text-xs sm:text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition-all duration-200 active:scale-95">
                     <i class="fa-solid fa-robot text-lg md:text-base"></i> Tanya BidanBot
                 </button>
             </div>
@@ -398,22 +424,22 @@
             }
         });
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
+function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active', 'bg-primary-green', 'text-white', 'border-primary-green');
                 btn.classList.add('bg-neutral-cream', 'text-neutral-gray');
             });
-
             document.getElementById(tabId).classList.add('active');
-
             const activeBtn = document.getElementById('btn-' + tabId);
             if(activeBtn) {
                 activeBtn.classList.remove('bg-neutral-cream', 'text-neutral-gray');
                 activeBtn.classList.add('active', 'bg-primary-green', 'text-white', 'border-primary-green');
             }
+        }
+
+        function closeModalEdukasi() {
+            document.getElementById('edukasi-modal').classList.add('hidden');
         }
     </script>
     

@@ -1,0 +1,147 @@
+{
+  "modules": [
+    {
+      "id": "bab-1",
+      "title": "BAB 1: 1000 Hari Emas",
+      "subtitle": "Pondasi Masa Depan Si Kecil",
+      "image": "img/edu_1000hpk.jpg",
+      "image_desc": "Infografis Garis Waktu: Hamil (270 hari) -> Lahir -> Baduta (730 hari) dengan bintang emas.",
+      "youtube_id": "-CWcbOG5tmU", 
+      "content": [
+        "Selamat ya, Ibu! Sekarang Ibu sedang memasuki gerbang perjalanan yang luar biasa. Mungkin Ibu sering mendengar istilah '1000 Hari Pertama Kehidupan' (1000 HPK).",
+        "Bayangkan Ibu sedang membangun pondasi rumah. 1000 HPK adalah masa pembangunan pondasi tubuh anak kita. Hitungannya dimulai sejak hari pertama adik bayi ada di perut Ibu, sampai nanti adik bayi berusia 2 tahun.",
+        "Kenapa disebut 'Masa Emas'? Karena di sinilah otak, jantung, dan organ penting dibentuk kilat. Apa yang Ibu makan dan rasakan sekarang, sangat menentukan masa depan si Kecil agar tumbuh cerdas dan bebas stunting."
+      ],
+      "quiz": [
+        {
+          "question": "Kapan hitungan 1000 Hari Pertama Kehidupan (HPK) dimulai?",
+          "options": ["Saat bayi lahir", "Saat bayi bisa berjalan", "Sejak dalam kandungan sampai usia 2 tahun"],
+          "correct": 2,
+          "explanation": "Betul! 1000 HPK = 270 hari di kandungan + 730 hari setelah lahir."
+        },
+        {
+          "question": "Mengapa Trimester 1 disebut masa paling kritis?",
+          "options": ["Karena perut belum besar", "Karena organ vital (jantung/otak) sedang dibentuk", "Karena Ibu malas makan"],
+          "correct": 1,
+          "explanation": "Tepat! Pembentukan dasar tubuh terjadi sangat pesat di 3 bulan pertama."
+        }
+      ]
+    },
+    {
+      "id": "bab-2",
+      "title": "BAB 2: Keajaiban Dalam Perut",
+      "subtitle": "Perkembangan Minggu 1-12",
+      "image": "img/edu_janin.jpg",
+      "image_desc": "Ilustrasi ukuran janin: Bulan 1 (Beras) -> Bulan 2 (Kacang) -> Bulan 3 (Jeruk Nipis).",
+      "youtube_id": "c38xENS7XUA",
+      "content": [
+        "Mungkin perut Ibu belum terlihat besar, tapi di dalam sana sedang sibuk lho! Pada usia 1 bulan, si Kecil masih mungil sebesar biji beras.",
+        "Masuk minggu ke-5, jantung mungilnya sudah mulai berdetak. Nanti saat USG di minggu 6-9, suaranya terdengar cepat seperti kuda berlari.",
+        "Di akhir bulan ke-3, si Kecil sudah sebesar buah JERUK NIPIS. Jari tangannya sudah terbentuk dan otaknya berkembang pesat. Subhanallah!"
+      ],
+      "quiz": [
+        {
+          "question": "Kapan jantung bayi biasanya mulai berdetak pertama kali?",
+          "options": ["Minggu ke-1", "Minggu ke-5", "Minggu ke-20"],
+          "correct": 1,
+          "explanation": "Benar Bu, jantung mulai berdetak sekitar minggu ke-5 meski masih sangat halus."
+        },
+        {
+          "question": "Sebesar apa ukuran janin saat akhir bulan ke-3?",
+          "options": ["Sebesar biji beras", "Sebesar semangka", "Sebesar jeruk nipis"],
+          "correct": 2,
+          "explanation": "Ya! Di akhir trimester 1, janin sudah sebesar jeruk nipis (± 28 gram)."
+        }
+      ]
+    },
+    {
+      "id": "bab-3",
+      "title": "BAB 3: Makan Enak Berdua",
+      "subtitle": "Nutrisi, Asam Folat & TTD",
+      "image": "img/edu_makan.jpg",
+      "image_desc": "Diagram Isi Piringku: 50% Sayur Buah, 25% Nasi, 25% Lauk.",
+      "youtube_id": "2SF7IoE3bIU",
+      "content": [
+        "Makan untuk dua orang bukan berarti porsinya dikali dua ya Bu, tapi KUALITASNYA yang juara. Ingat rumus 'Isi Piringku': Setengah piring sayur & buah, setengahnya lagi nasi & lauk (ikan/telur/tempe).",
+        "Wajib penuhi ASAM FOLAT (dari sayur hijau/kacang) sebagai 'helm pelindung' saraf bayi agar tidak cacat.",
+        "Jangan lupa minum Tablet Tambah Darah (TTD) minimal 90 tablet selama hamil agar tidak anemia. Tips: Minum pakai air jeruk/putih, JANGAN pakai teh/kopi ya Bu!"
+      ],
+      "quiz": [
+        {
+          "question": "Apa manfaat utama Asam Folat bagi janin?",
+          "options": ["Memutihkan kulit", "Mencegah cacat tabung saraf", "Menebalkan rambut"],
+          "correct": 1,
+          "explanation": "100 buat Ibu! Asam folat krusial untuk menutup saraf tulang belakang janin[cite: 98]."
+        },
+        {
+          "question": "Berapa minimal Tablet Tambah Darah (TTD) diminum selama hamil?",
+          "options": ["10 tablet", "Minimal 90 tablet", "Kalau ingat saja"],
+          "correct": 1,
+          "explanation": "Betul, minimal 90 tablet rutin agar tidak kurang darah saat melahirkan[cite: 107]."
+        }
+      ]
+    },
+    {
+      "id": "bab-4",
+      "title": "BAB 4: Tanda Bahaya",
+      "subtitle": "Waspada & Periksa Rutin",
+      "image": "img/edu_bahaya.jpg",
+      "image_desc": "Poster Lampu Merah: Pingsan, Pendarahan, Demam Tinggi.",
+      "youtube_id": "KDEFNKJXLuI",
+      "content": [
+        "Mual muntah (morning sickness) itu wajar. Tapi jika muntah berlebihan (>10x sehari) sampai lemas, segera ke Bidan ya Bu.",
+        "Wajib periksa kehamilan minimal 1 kali di Trimester 1 ini (cek '12T' termasuk tensi & lab)[cite: 114].",
+        "LAMPU MERAH (Bahaya): Jika keluar darah banyak, perut nyeri hebat, atau demam tinggi, JANGAN DITUNDA. [cite_start]Segera ke Puskesmas/RS untuk menyelamatkan Ibu dan Janin [cite: 116-118]."
+      ],
+      "quiz": [
+        {
+          "question": "Manakah yang termasuk TANDA BAHAYA dan harus segera ke dokter?",
+          "options": ["Mual ringan pagi hari", "Sering pipis", "Keluar darah jalan lahir / nyeri hebat"],
+          "correct": 2,
+          "explanation": "Benar! [cite_start]Perdarahan & nyeri hebat bisa jadi tanda keguguran, bahaya! [cite: 135]"
+        },
+        {
+          "question": "Berapa kali minimal periksa kehamilan di Trimester 1?",
+          "options": ["Tidak perlu", "Minimal 1 kali", "Minimal 10 kali"],
+          "correct": 1,
+          "explanation": "Minimal 1 kali pemeriksaan lengkap untuk memastikan janin berkembang[cite: 143]."
+        }
+      ]
+    },
+    {
+      "id": "bab-5",
+      "title": "BAB 5: Merawat Janin Setiap Hari",
+      "subtitle": "Membangun Kebiasaan Baik",
+      "image": "img/edu_habit.jpg",
+      "image_desc": "Infografis Jadwal Sehari: Pagi sarapan, Siang istirahat, Malam TTD & Doa.",
+      "youtube_id": "ASTuae3afes",
+      "content": [
+        "Ibu yang hebat, merawat janin itu ibarat merawat tanaman, harus dirawat sedikit demi sedikit setiap hari. [cite_start]Yuk kita cek kebiasaan baik di 'Daftar Centang Harian' kita [cite: 147-149].",
+        "Pertama, Minum TTD Tiap Malam. Cadangan zat besi dipakai berdua sama adik bayi, jadi jangan sampai lupa. [cite_start]Tips jitu: Minum malam sebelum tidur biar tidak mual [cite: 151-154].",
+        "Kedua, Minum Air Putih 8-10 Gelas. [cite_start]Ini untuk menjaga 'kolam renang' (air ketuban) adik bayi supaya jernih dan cukup jumlahnya [cite: 155-157].",
+        "Ketiga, Gerak Badan & Berjemur. Jalan pagi bagus untuk tulang. [cite_start]Tapi ingat, hindari mengangkat beban berat seperti ember air atau beras ya Bu [cite: 159-161].",
+        "Keempat, Doa & Kasih Sayang. [cite_start]Sering-sering elus perut dan ajak ngobrol si Kecil untuk ikatan batin yang kuat [cite: 163-165]."
+      ],
+      "quiz": [
+        {
+          "question": "Kapan waktu terbaik meminum Tablet Tambah Darah (TTD) agar mengurangi mual?",
+          "options": ["Pagi perut kosong", "Siang pakai es teh", "Malam sebelum tidur"],
+          "correct": 2,
+          "explanation": "Benar! [cite_start]Minum malam hari sebelum tidur membantu mengurangi rasa mual[cite: 181]."
+        },
+        {
+          "question": "Mengapa Ibu hamil perlu minum air putih 8-10 gelas sehari?",
+          "options": ["Supaya kulit putih", "Menjaga volume air ketuban", "Supaya bayi cepat lahir"],
+          "correct": 1,
+          "explanation": "Tepat sekali. [cite_start]Air putih penting untuk membentuk air ketuban dan mencegah dehidrasi[cite: 189]."
+        },
+        {
+          "question": "Aktivitas fisik apa yang DILARANG atau harus dihindari?",
+          "options": ["Jalan pagi santai", "Mengangkat ember air penuh / beban berat", "Pekerjaan rumah ringan"],
+          "correct": 1,
+          "explanation": "Mengangkat beban berat bisa menyebabkan cedera punggung dan menekan perut[cite: 196]."
+        }
+      ]
+    }
+  ]
+}
