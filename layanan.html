@@ -11,8 +11,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: { green: '#2FA77C', mint: '#7CC8B2', light: '#DFF3EC' },
-                        secondary: { coral: '#F07C82', peach: '#F6A5A8', blush: '#FCE3E3' },
+                        primary: { green: '#F07C82', mint: '#F6A5A8', light: '#FCE3E3' },
+                        secondary: { coral: '#2FA77C', peach: '#7CC8B2', blush: '#DFF3EC' },
                         neutral: { cream: '#F4EDE4', white: '#FFFFFF', gray: '#6B6B6B', dark: '#2C2C2C' }
                     },
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-<body class="bg-neutral-cream text-neutral-dark font-sans flex flex-col min-h-screen pb-24 md:pb-0">
+<body class="bg-neutral-cream text-neutral-dark font-sans flex flex-col h-screen overflow-hidden pb-24 md:pb-0">
 
     <nav class="bg-neutral-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,22 +85,24 @@
         </div>
     </nav>
 
-    <div class="bg-primary-green shadow-md text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div>
-                <h1 class="text-xl font-bold">Layanan Interaktif</h1>
-                <p class="text-primary-light text-sm" id="greeting-text">Halo Bunda!</p>
-            </div>
-            <div class="flex items-center gap-3 bg-white/20 px-4 py-2 rounded-full cursor-pointer hover:bg-white/30 transition" onclick="switchTab('tab3')">
-                <i class="fa-solid fa-star text-yellow-300"></i>
-                <div class="text-sm font-medium">
-                    <span id="header-level">Lv.1</span> (<span id="header-xp">0 XP</span>)
+    <div class="z-40 shadow-md flex-shrink-0">
+        <!-- Green Header Bar -->
+        <div class="bg-primary-green text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+                <div>
+                    <h1 class="text-xl font-bold">Layanan Interaktif</h1>
+                    <p class="text-primary-light text-sm" id="greeting-text">Halo Bunda!</p>
+                </div>
+                <div class="flex items-center gap-3 bg-white/20 px-4 py-2 rounded-full cursor-pointer hover:bg-white/30 transition" onclick="switchTab('tab3')">
+                    <i class="fa-solid fa-star text-yellow-300"></i>
+                    <div class="text-sm font-medium">
+                        <span id="header-level">Lv.1</span> (<span id="header-xp">0 XP</span>)
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="bg-neutral-white border-b border-gray-200 sticky top-16 z-40 shadow-sm w-full">
+        <!-- Tab Navigation Bar -->
+        <div class="bg-neutral-white border-b border-gray-200 w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-2 bg-neutral-white">
             <div class="grid grid-cols-2 gap-3 md:flex md:space-x-4 overflow-x-auto no-scrollbar" id="tour-tabs-container">
                 
@@ -125,9 +127,10 @@
                 </button>
             </div>
         </div>
+        </div>
     </div>
 
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-grow overflow-y-auto w-full px-4 sm:px-6 lg:px-8 py-8">
 
         <div id="tab1" class="tab-content active">
             <div class="flex flex-col lg:flex-row gap-8">
@@ -206,7 +209,7 @@
             </div>
 
             <div onclick="switchTab('tab4')"
-                class="mt-8 bg-primary-light border border-primary-mint rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-[#c9ebd1] transition">
+                class="mt-8 bg-primary-light border border-primary-mint rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-[#f5c4c6] transition">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-full bg-primary-green flex items-center justify-center">
                         <i class="fa-solid fa-robot text-white"></i>
@@ -261,7 +264,7 @@
                 </div>
 
                 <div onclick="switchTab('tab4')"
-                    class="mt-8 bg-secondary-blush border border-secondary-peach rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-[#fad4d4] transition">
+                    class="mt-8 bg-secondary-blush border border-secondary-peach rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-[#c9ebd1] transition">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-secondary-coral flex items-center justify-center">
                             <i class="fa-solid fa-robot text-white"></i>
