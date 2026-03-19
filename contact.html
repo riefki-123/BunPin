@@ -36,51 +36,8 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Shape Divider: Transisi Pink ke Cream */
-        .custom-shape-divider-mid {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-        }
-        .custom-shape-divider-mid svg {
-            position: relative;
-            display: block;
-            width: calc(129% + 1.3px);
-            height: 60px;
-        }
-        .custom-shape-divider-mid .shape-fill {
-            fill: #F4EDE4; /* Warna bg-neutral-cream */
-        }
-
-        /* Shape Divider: Transisi Cream ke Footer Putih (Dibuat Minimalis) */
-        .custom-shape-divider-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
-        }
-        .custom-shape-divider-bottom svg {
-            position: relative;
-            display: block;
-            width: calc(129% + 1.3px);
-            height: 35px; /* Minimalis untuk Mobile */
-        }
-        .custom-shape-divider-bottom .shape-fill {
-            fill: #FFFFFF; /* Warna bg-neutral-white */
-        }
-
-        @media (min-width: 768px) {
-            .custom-shape-divider-bottom svg {
-                height: 50px; /* Sedikit lebih tinggi di Desktop */
-            }
-        }
+        
+        /* REVISI: CSS Custom Shape Divider dihapus karena kita gunakan versi inline Tailwind agar bebas bug di mobile */
     </style>
 </head>
 
@@ -92,8 +49,7 @@
                 <div class="flex items-center">
                     <a href="index.html" class="flex items-center gap-2 group">
                         <img src="img/logo.png" alt="Logo BundaPintar" class="h-10 w-auto group-hover:scale-105 transition-transform" onerror="this.src='https://via.placeholder.com/150x150?text=Logo'">
-                        <span class="font-bold text-xl text-primary-pink tracking-tight hidden sm:block">Bunda<span
-                                class="text-secondary-green">Pintar</span></span>
+                        <span class="font-bold text-lg sm:text-xl text-primary-pink tracking-tight">Bunda<span class="text-secondary-green">Pintar</span></span>
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-2">
@@ -138,9 +94,9 @@
                 </div>
             </div>
 
-            <div class="custom-shape-divider-mid">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,115.54,161.7,115.54,240.5,99.21,268.32,93.41,295.45,86.2,321.39,56.44Z" class="shape-fill"></path>
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[40px] md:h-[80px]">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,115.54,161.7,115.54,240.5,99.21,268.32,93.41,295.45,86.2,321.39,56.44Z" fill="#F4EDE4"></path>
                 </svg>
             </div>
         </section>
@@ -210,9 +166,9 @@
                 </div>
             </div>
 
-            <div class="custom-shape-divider-bottom">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,115.54,161.7,115.54,240.5,99.21,268.32,93.41,295.45,86.2,321.39,56.44Z" class="shape-fill"></path>
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[40px] md:h-[80px]">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,115.54,161.7,115.54,240.5,99.21,268.32,93.41,295.45,86.2,321.39,56.44Z" fill="#FFFFFF"></path>
                 </svg>
             </div>
         </section>

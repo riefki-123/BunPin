@@ -1,9 +1,9 @@
 /**
  * Logic for Layanan Hub (layanan.html)
- * Diperbarui dengan Database Pertumbuhan & Kehamilan + Fetch JSON Gamifikasi
+ * Diperbarui dengan Database Pertumbuhan & Kehamilan + Fetch JSON Gamifikasi + DOM Output + YouTube Link
  */
 
-// --- DATABASE LOKAL (Dari scriptmain.js) ---
+// --- DATABASE LOKAL ---
 const dataPertumbuhan = {
     L: { // Laki-laki
         0: { bb: [2.5, 4.4], tb: [46.1, 53.7] }, 1: { bb: [3.4, 5.8], tb: [50.8, 58.6] }, 2: { bb: [4.3, 7.1], tb: [54.4, 62.4] },
@@ -60,7 +60,7 @@ function initUI() {
 }
 
 /* =========================================
-   PANTAU TUMBUH (TERINTEGRASI ALGORITMA BARU)
+   PANTAU TUMBUH
 ========================================= */
 let growthChartInstance = null;
 
@@ -75,7 +75,7 @@ function initChart() {
 
         if (!isNaN(age) && age >= 0 && age <= 24) {
             const standar = dataPertumbuhan[gender][age];
-            refText.innerHTML = `Pita Hijau (WHO) Usia ${age} Bln:<br> BB: <b>${standar.bb[0]}-${standar.bb[1]} kg</b> | TB: <b>${standar.tb[0]}-${standar.tb[1]} cm</b>`;
+            refText.innerHTML = `Rentang Standar WHO Usia ${age} Bulan:<br> BB: <b>${standar.bb[0]}-${standar.bb[1]} kg</b> | TB: <b>${standar.tb[0]}-${standar.tb[1]} cm</b>`;
             refText.classList.remove('hidden');
         }
     });
@@ -87,25 +87,68 @@ function initChart() {
         const bb = parseFloat(document.getElementById('berat').value);
         const tb = parseFloat(document.getElementById('tinggi').value);
 
-        // Skrining Cepat
         const standar = dataPertumbuhan[gender][usia];
-        let statusText = "";
-        if(bb < standar.bb[0]) statusText = "Perhatian: BB di bawah Pita Hijau.";
-        else if(bb > standar.bb[1]) statusText = "Perhatian: BB di atas rata-rata.";
-        else statusText = "Hebat! BB Si Kecil ada di Pita Hijau.";
+        
+        let statusBB = "normal";
+        let statusText = "Hebat! Pertumbuhan BB Si Kecil ideal dan ada di Pita Hijau.";
+        let icon = '<i class="fa-solid fa-star"></i>';
+        let bannerColor = 'bg-secondary-green'; 
+        
+        if (bb < standar.bb[0]) {
+            statusBB = "kurang";
+            statusText = "Perhatian: BB Si Kecil berada di bawah Pita Hijau/Standar.";
+            icon = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            bannerColor = 'bg-primary-pink';
+        } else if (bb > standar.bb[1]) {
+            statusBB = "lebih";
+            statusText = "Perhatian: BB Si Kecil berada di atas rata-rata (Risiko Overweight).";
+            icon = '<i class="fa-solid fa-circle-up"></i>';
+            bannerColor = 'bg-yellow-500';
+        }
+
+        const panelHasil = document.getElementById('hasil-tumbuh');
+        const banner = document.getElementById('hasil-banner');
+        const iconContainer = document.getElementById('hasil-icon');
+        const textStatus = document.getElementById('hasil-status-text');
+        
+        banner.classList.remove('bg-secondary-green', 'bg-primary-pink', 'bg-yellow-500');
+        banner.classList.add(bannerColor);
+        
+        iconContainer.innerHTML = icon;
+        textStatus.innerText = statusText;
+        
+        document.getElementById('hasil-bb').innerText = bb + " kg";
+        document.getElementById('hasil-tb').innerText = tb + " cm";
+        document.getElementById('hasil-std-bb').innerText = standar.bb[0] + " - " + standar.bb[1] + " kg";
+        document.getElementById('hasil-std-tb').innerText = standar.tb[0] + " - " + standar.tb[1] + " cm";
+
+        let percentage = 50;
+        if (statusBB === "kurang") {
+            let ratio = bb / standar.bb[0];
+            percentage = ratio * 30;
+        } else if (statusBB === "lebih") {
+            let overflow = bb - standar.bb[1];
+            percentage = 70 + (overflow * 10);
+            if (percentage > 100) percentage = 100;
+        } else {
+            let range = standar.bb[1] - standar.bb[0];
+            let current = bb - standar.bb[0];
+            percentage = 30 + ((current / range) * 40);
+        }
+        document.getElementById('hasil-bar-indicator').style.left = `${percentage}%`;
 
         store.addRiwayatTumbuh({ gender, bulan: usia, bb, tb, tanggal_cek: new Date().toISOString() });
         const result = store.addXP(20);
         updateXPUI(result);
 
-        alert(`${statusText}\nBunda mendapatkan +20 XP karena mencatat hari ini!`);
-
+        panelHasil.classList.remove('hidden');
         document.getElementById('status-rujukan').classList.add('hidden');
+        
         renderChart();
         confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
     });
 
-    renderChart(); // Initial render
+    renderChart();
 }
 
 function renderChart() {
@@ -114,7 +157,7 @@ function renderChart() {
 
     const state = store.getState();
     const riwayat = state.riwayat_tumbuh;
-    const gender = riwayat.length > 0 ? riwayat[0].gender : 'L'; // Default L if empty
+    const gender = riwayat.length > 0 ? riwayat[0].gender : 'L'; 
 
     const labels = Array.from({ length: 25 }, (_, i) => i);
     const pitaHijauLower = labels.map(m => dataPertumbuhan[gender][m].bb[0]);
@@ -132,12 +175,12 @@ function renderChart() {
             datasets: [
                 {
                     label: 'Batas Atas Normal', data: pitaHijauUpper,
-                    borderColor: 'rgba(124, 200, 178, 0.2)', backgroundColor: 'rgba(124, 200, 178, 0.2)',
+                    borderColor: 'rgba(47, 167, 124, 0.2)', backgroundColor: 'rgba(47, 167, 124, 0.2)',
                     fill: '+1', pointRadius: 0, borderWidth: 1, tension: 0.4
                 },
                 {
                     label: 'Batas Bawah Normal', data: pitaHijauLower,
-                    borderColor: 'rgba(124, 200, 178, 0.2)', backgroundColor: 'transparent',
+                    borderColor: 'rgba(47, 167, 124, 0.2)', backgroundColor: 'transparent',
                     fill: false, pointRadius: 0, borderWidth: 1, tension: 0.4
                 },
                 {
@@ -155,7 +198,7 @@ function renderChart() {
 }
 
 /* =========================================
-   JEJAK JANIN (TERINTEGRASI ALGORITMA BARU)
+   JEJAK JANIN
 ========================================= */
 function initJejakJanin() {
     const form = document.getElementById('form-janin');
@@ -190,7 +233,7 @@ function initJejakJanin() {
 
         document.getElementById('res-usia-janin').textContent = `${weeks} Ming ${days} Hari`;
         document.getElementById('res-hpl').textContent = hpl.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-        document.getElementById('res-estimasi').innerHTML = `Berat: <span class="text-primary-mint font-extrabold text-lg">${estWeight}</span><br> Panjang: <span class="text-primary-mint font-extrabold text-lg">${estLenght}</span>`;
+        document.getElementById('res-estimasi').innerHTML = `Berat: <span class="text-primary-peach font-extrabold text-lg">${estWeight}</span><br> Panjang: <span class="text-primary-peach font-extrabold text-lg">${estLenght}</span>`;
 
         document.getElementById('janin-result').classList.replace('hidden', 'grid');
     });
@@ -202,7 +245,6 @@ function initJejakJanin() {
 let edukasiDataGlobal = [];
 
 function loadEdukasiJSON() {
-    // Memanggil data_edukasi.json dari folder lokal (Pastikan file satu folder/bisa diakses)
     fetch('data_edukasi.json')
         .then(response => response.json())
         .then(data => {
@@ -224,8 +266,8 @@ function renderDaftarMateri() {
         const thumbUrl = modul.youtube_id ? `https://img.youtube.com/vi/${modul.youtube_id}/hqdefault.jpg` : modul.image;
         
         const html = `
-        <div class="bg-neutral-white rounded-2xl p-6 shadow flex flex-col sm:flex-row gap-6 items-center border hover:border-primary-mint transition group cursor-pointer" onclick="bukaModalEdukasi(${index})">
-            <div class="w-24 h-24 rounded-xl bg-primary-light flex items-center justify-center shrink-0 overflow-hidden">
+        <div class="bg-neutral-white rounded-2xl p-6 shadow flex flex-col sm:flex-row gap-6 items-center border hover:border-primary-peach transition group cursor-pointer" onclick="bukaModalEdukasi(${index})">
+            <div class="w-24 h-24 rounded-xl bg-primary-blush flex items-center justify-center shrink-0 overflow-hidden">
                 <img src="${thumbUrl}" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
             </div>
             <div class="flex-grow text-center sm:text-left">
@@ -235,7 +277,7 @@ function renderDaftarMateri() {
                 <h3 class="text-xl font-bold text-neutral-dark mb-1">${modul.title}</h3>
                 <p class="text-sm text-neutral-gray">${modul.subtitle}</p>
             </div>
-            <button class="bg-neutral-cream text-primary-green font-bold w-full sm:w-auto px-6 py-3 rounded-xl hover:bg-primary-mint hover:text-white transition whitespace-nowrap">
+            <button class="bg-neutral-cream text-primary-pink font-bold w-full sm:w-auto px-6 py-3 rounded-xl hover:bg-primary-peach hover:text-white transition whitespace-nowrap">
                 Buka Materi
             </button>
         </div>`;
@@ -251,8 +293,28 @@ window.bukaModalEdukasi = function(index) {
     document.getElementById('modal-subtitle').textContent = modul.subtitle;
     document.getElementById('modal-img').src = modul.image || `https://img.youtube.com/vi/${modul.youtube_id}/hqdefault.jpg`;
     
-    // Render Paragraf
-    const contentHtml = modul.content.map(p => `<p>${p}</p>`).join('');
+    // Render Paragraf Konten
+    let contentHtml = modul.content.map(p => `<p>${p}</p>`).join('');
+
+    // REVISI: Tambahkan Tautan Video YouTube di Bawah Konten Jika Ada
+    if (modul.youtube_id) {
+        const thumbUrl = `https://img.youtube.com/vi/${modul.youtube_id}/hqdefault.jpg`;
+        const videoUrl = `https://www.youtube.com/watch?v=${modul.youtube_id}`;
+        contentHtml += `
+            <div class="mt-6 border-t border-gray-200 pt-5">
+                <p class="font-bold text-neutral-dark mb-3"><i class="fa-brands fa-youtube text-red-500 text-lg mr-2"></i>Tonton Video Penjelasan Lengkap:</p>
+                <a href="${videoUrl}" target="_blank" rel="noopener noreferrer" class="block relative rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all group border border-gray-100">
+                    <img src="${thumbUrl}" class="w-full aspect-video object-cover" alt="Video Penjelasan">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+                        <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl shadow-lg transform group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        `;
+    }
+
     document.getElementById('modal-content').innerHTML = contentHtml;
 
     // Render Kuis
@@ -261,7 +323,7 @@ window.bukaModalEdukasi = function(index) {
     
     modul.quiz.forEach((q, qIdx) => {
         let optionsHTML = q.options.map((opt, oIdx) => `
-            <button onclick="jawabKuis(this, ${oIdx}, ${q.correct}, 'exp-${index}-${qIdx}')" class="w-full text-left p-3 rounded-lg border border-secondary-peach bg-white hover:bg-secondary-blush transition text-sm text-neutral-dark font-medium">
+            <button onclick="jawabKuis(this, ${oIdx}, ${q.correct}, 'exp-${index}-${qIdx}')" class="w-full text-left p-3 rounded-lg border border-secondary-mint bg-white hover:bg-secondary-light transition text-sm text-neutral-dark font-medium">
                 ${opt}
             </button>
         `).join('');
@@ -283,30 +345,28 @@ window.bukaModalEdukasi = function(index) {
 window.jawabKuis = function(btnElement, selected, correct, expId) {
     const parentBox = btnElement.parentElement;
     
-    // Disable semua tombol di dalam soal ini
     Array.from(parentBox.children).forEach(btn => {
         btn.disabled = true;
-        btn.classList.remove('hover:bg-secondary-blush');
+        btn.classList.remove('hover:bg-secondary-light');
     });
 
     if(selected === correct) {
-        btnElement.classList.replace('bg-white', 'bg-primary-green');
-        btnElement.classList.replace('border-secondary-peach', 'border-primary-green');
+        btnElement.classList.replace('bg-white', 'bg-secondary-green');
+        btnElement.classList.replace('border-secondary-mint', 'border-secondary-green');
         btnElement.classList.replace('text-neutral-dark', 'text-white');
         btnElement.innerHTML += ' <i class="fa-solid fa-check-circle float-right mt-0.5"></i>';
         
-        // Kasih XP
         const res = store.addXP(20);
         updateXPUI(res);
         confetti({ particleCount: 30, spread: 40 });
     } else {
-        btnElement.classList.replace('bg-white', 'bg-secondary-coral');
+        btnElement.classList.replace('bg-white', 'bg-primary-pink');
+        btnElement.classList.replace('border-secondary-mint', 'border-primary-pink');
         btnElement.classList.replace('text-neutral-dark', 'text-white');
         btnElement.innerHTML += ' <i class="fa-solid fa-xmark-circle float-right mt-0.5"></i>';
         
-        // Highlight yang benar
-        parentBox.children[correct].classList.replace('bg-white', 'bg-primary-light');
-        parentBox.children[correct].classList.add('border-primary-green', 'text-primary-green');
+        parentBox.children[correct].classList.replace('bg-white', 'bg-secondary-light');
+        parentBox.children[correct].classList.add('border-secondary-green', 'text-secondary-green');
     }
 
     document.getElementById(expId).classList.remove('hidden');
@@ -353,7 +413,7 @@ function renderBadges() {
     if (tags.length === 0) {
         container.innerHTML = `<span class="text-xs bg-neutral-cream text-neutral-gray px-2 py-1 rounded-md">Belum ada badge</span>`;
     } else {
-        container.innerHTML = tags.map(t => `<span class="text-xs bg-primary-light text-primary-green border border-primary-mint px-2 py-1 rounded-md shadow-sm"><i class="fa-solid fa-medal mr-1"></i>${t}</span>`).join('');
+        container.innerHTML = tags.map(t => `<span class="text-xs bg-primary-blush text-primary-pink border border-primary-peach px-2 py-1 rounded-md shadow-sm"><i class="fa-solid fa-medal mr-1"></i>${t}</span>`).join('');
     }
 }
 
